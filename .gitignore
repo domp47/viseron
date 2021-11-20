@@ -106,6 +106,14 @@
 !/requirements_test.txt
 !setup.py
 
+# Angular Web App
+!/viseron-web
+!/viseron-web/*
+!/viseron-web/src/*
+!/viseron-web/src/app/*
+!/viseron-web/src/assets/*
+!/viseron-web/src/environments/*
+
 # Repo
 !/docs
 !/docs/*
