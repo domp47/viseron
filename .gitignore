@@ -112,6 +112,8 @@
 !/viseron-web/src/*
 !/viseron-web/src/app/*
 !/viseron-web/src/app/about/*
+!/viseron-web/src/app/cameras/*
+!/viseron-web/src/app/cameras/camera-grid/*
 !/viseron-web/src/app/home/*
 !/viseron-web/src/assets/*
 !/viseron-web/src/environments/*

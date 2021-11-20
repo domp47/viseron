@@ -33,12 +33,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { CameraGridComponent } from './cameras/camera-grid/camera-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    CameraGridComponent
   ],
   imports: [
     BrowserModule,

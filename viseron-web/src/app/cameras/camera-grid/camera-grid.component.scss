@@ -1,0 +1,11 @@
+.camera-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: baseline;
+    align-content: flex-start;
+}
+
+.camera-card {
+    margin-top: 2rem;
+}
