@@ -180,14 +180,14 @@ class FFMPEGNVR:
                 self.motion_detector.topic_processed_motion, self._motion_return_queue
             )
 
+        self.camera.stream.decoders[self._motion_decoder].scan.set()
         if config.motion_detection.trigger_detector:
-            self.camera.stream.decoders[self._motion_decoder].scan.set()
             if config.object_detection.enable:
                 self.camera.stream.decoders[self._object_decoder].scan.clear()
         else:
             if config.object_detection.enable:
                 self.camera.stream.decoders[self._object_decoder].scan.set()
-            self.camera.stream.decoders[self._motion_decoder].scan.clear()
+
         self.idle_frames = 0
 
         self._post_processor_topic = (

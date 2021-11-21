@@ -8,7 +8,7 @@ from .config_logging import SCHEMA as LOGGING_SCHEMA, LoggingConfig
 DEFAULTS = {
     "interval": 1,
     "trigger_detector": True,
-    "trigger_recorder": False,
+    "trigger_recorder": True,
     "timeout": True,
     "max_timeout": 30,
     "width": 300,
