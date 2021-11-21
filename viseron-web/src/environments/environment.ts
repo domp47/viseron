@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  version: "maj.min.pat"
+  version: "maj.min.pat",
+  backendUrl: "http://localhost:8888"
 };
 
 /*

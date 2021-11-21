@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CameraService } from 'src/app/services/camera/camera.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-camera-grid',
@@ -7,19 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CameraGridComponent implements OnInit {
 
-  cameraList: any[] = []
+  desiredWidth = 800; //px
+  cameraList: any[] = [];
 
-  constructor() { 
-    for (let index = 0; index < 5; index++) {
-      const obj: any = {}
-      obj["name"] = "Front";
-      obj["host"] = "192.168.2.1";
-
-      this.cameraList.push(obj);
-    }
-  }
+  constructor(private cameraService: CameraService) { }
 
   ngOnInit(): void {
+    this.cameraService.getCameraList().subscribe(data => {
+      for (var camera of data["results"]) {
+        if (camera["camera"]["stream"]["width"] > this.desiredWidth) {
+          let factor = Math.floor(camera["camera"]["stream"]["width"] / this.desiredWidth);
+          let width  = Math.floor(camera["camera"]["stream"]["width"] / factor);
+          let height = Math.floor(camera["camera"]["stream"]["height"] / factor);
+          
+          camera["camera"]["stream"]["url"] = `${environment.backendUrl}/${camera["config"]["camera"]["name_slug"]}/mjpeg-stream?width=${width}&height=${height}`;
+        } else {
+          camera["camera"]["stream"]["url"] = `${environment.backendUrl}/${camera["config"]["camera"]["name_slug"]}/mjpeg-stream`;
+        }
+        this.cameraList.push(camera);
+      }
+    })
+  }
+
+  print(event: any) {
+    console.log(event);
   }
 
 }

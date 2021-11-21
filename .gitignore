@@ -91,6 +91,7 @@
 !/viseron/webserver/api
 !/viseron/webserver/api/*
 !/viseron/webserver/api/v1
+!/viseron/webserver/api/v1/utils/*
 !/viseron/webserver/api/v1/*
 !/viseron/webserver/assets
 !/viseron/webserver/assets/*
@@ -115,7 +116,10 @@
 !/viseron-web/src/app/cameras/*
 !/viseron-web/src/app/cameras/camera-grid/*
 !/viseron-web/src/app/home/*
+!/viseron-web/src/app/services/*
+!/viseron-web/src/app/services/camera/*
 !/viseron-web/src/assets/*
+!/viseron-web/src/assets/images/*
 !/viseron-web/src/environments/*
 
 # Repo
