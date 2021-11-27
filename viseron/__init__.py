@@ -6,6 +6,7 @@ from viseron.cleanup import Cleanup
 from viseron.config import NVRConfig, ViseronConfig, load_config
 from viseron.const import LOG_LEVELS, THREAD_STORE_CATEGORY_NVR
 from viseron.data_stream import DataStream
+from viseron.db.loader import get_sql_updater
 from viseron.detector import Detector
 from viseron.exceptions import (
     FFprobeError,
@@ -33,6 +34,9 @@ class Viseron:
         log_settings(config)
         LOGGER.info("-------------------------------------------")
         LOGGER.info("Initializing...")
+
+        LOGGER.info("Initializing Database")
+        get_sql_updater()
 
         thread_watchdog = ThreadWatchDog()
         subprocess_watchdog = SubprocessWatchDog()

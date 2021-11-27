@@ -6,6 +6,7 @@ import subprocess as sp
 import time
 
 from viseron.const import CAMERA_SEGMENT_DURATION
+from viseron.db.recording import add_recording
 from viseron.detector import Detector
 
 
@@ -186,7 +187,7 @@ class Segments:
         if pipe.returncode != 0:
             self._logger.error(f"Error concatenating segments: {pipe.stderr}")
 
-    def concat_segments(self, event_start, event_end, file_name):
+    def concat_segments(self, event_start, event_end, file_name, camera_name):
         """Concatenate segments between event_start and event_end."""
         self._logger.debug("Concatenating segments")
         segment_information = self.get_segment_information()
@@ -232,3 +233,8 @@ class Segments:
             return
 
         self._logger.debug("Segments concatenated")
+        self._logger.debug("Adding recording to Database")
+
+        add_recording(camera_name, segment_information, event_start, file_name)
+
+        self._logger.debug("Recording added to Database")

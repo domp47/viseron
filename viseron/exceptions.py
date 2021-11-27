@@ -6,6 +6,10 @@ class ViseronError(Exception):
     """General Viseron exception occurred."""
 
 
+class DatabaseObjectNotFound(ViseronError):
+    """General Viseron DB exception when an object is not found."""
+
+
 class FFprobeError(ViseronError):
     """Raised when FFprobe returns an error."""
 

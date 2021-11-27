@@ -1357,6 +1357,22 @@ The switch is used to arm/disarm a camera. When disarmed, no system resources ar
 
 ---
 
+## Database
+<details>
+  <summary>Config example</summary>
+
+  ```yaml
+  database:
+    type: sqlite
+  ```
+</details>
+
+| Name | Type | Default | Supported options | Description |
+| -----| -----| ------- | ----------------- |------------ |
+| type | str  | ```sqlite``` | ```sqlite``` | Type of database backend to use |
+
+---
+
 ## Secrets
 Any value in ```config.yaml``` can be substituted with secrets stored in ```secrets.yaml```.\
 This can be used to remove any private information from your ```config.yaml``` to make it easier to share your ```config.yaml``` with others.

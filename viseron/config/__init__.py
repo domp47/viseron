@@ -15,6 +15,7 @@ from viseron.exceptions import (
 )
 from viseron.motion import AbstractMotionDetection, AbstractMotionDetectionConfig
 
+from .config_database import DatabaseConfig
 from .config_logging import LoggingConfig
 from .config_motion_detection import MotionDetectionConfig
 from .config_mqtt import MQTTConfig
@@ -119,6 +120,7 @@ VISERON_CONFIG_SCHEMA = Schema(
             Optional("recorder", default={}): RecorderConfig.schema,
             Optional("mqtt", default=None): Any(MQTTConfig.schema, None),
             Optional("logging", default={}): LoggingConfig.schema,
+            Required("database", default={}): DatabaseConfig.schema,
         },
         detector_enabled_check,
         motion_type_check,

@@ -4,6 +4,7 @@ from typing import List
 from cv2 import FONT_HERSHEY_SIMPLEX
 
 CONFIG_PATH = "/config/config.yaml"
+SQLITE_DB_PATH = "/config/db.sqlite"
 SECRETS_PATH = "/config/secrets.yaml"
 RECORDER_PATH = "/recordings"
 DEFAULT_CONFIG = """

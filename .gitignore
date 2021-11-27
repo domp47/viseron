@@ -57,6 +57,9 @@
 !/viseron/camera/*
 !/viseron/config
 !/viseron/config/*
+!/viseron/db/*
+!/viseron/db/sqlite/*
+!/viseron/db/sqlite/scripts/*
 !/viseron/detector
 !/viseron/detector/*
 !/viseron/detector/darknet

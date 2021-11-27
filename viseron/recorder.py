@@ -136,6 +136,7 @@ class FFMPEGRecorder:
             self._event_start - self.config.recorder.lookback,
             self._event_end,
             self._recording_name,
+            self.config.camera.name,
         )
         # Dont resume cleanup if new recording started during encoding
         if not self.is_recording:
