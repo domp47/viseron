@@ -16,11 +16,11 @@ export class CameraGridComponent implements OnInit {
 
   ngOnInit(): void {
     this.cameraService.getCameraList().subscribe(data => {
-      for (var camera of data["results"]) {
+      for (const camera of data["results"]) {
         if (camera["camera"]["stream"]["width"] > this.desiredWidth) {
-          let factor = Math.floor(camera["camera"]["stream"]["width"] / this.desiredWidth);
-          let width  = Math.floor(camera["camera"]["stream"]["width"] / factor);
-          let height = Math.floor(camera["camera"]["stream"]["height"] / factor);
+          const factor = Math.floor(camera["camera"]["stream"]["width"] / this.desiredWidth);
+          const width  = Math.floor(camera["camera"]["stream"]["width"] / factor);
+          const height = Math.floor(camera["camera"]["stream"]["height"] / factor);
           
           camera["camera"]["stream"]["url"] = `${environment.backendUrl}/${camera["config"]["camera"]["name_slug"]}/mjpeg-stream?width=${width}&height=${height}`;
         } else {
