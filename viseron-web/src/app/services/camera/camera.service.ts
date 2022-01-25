@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { BaseService } from '../base.service';
@@ -12,8 +12,27 @@ export class CameraService extends BaseService {
     super("camera");
   }
 
-  getCameraList(): Observable<any> {
-    return this.http.get(this.url).pipe(
+  getCameraList(queryParams: any | undefined = undefined): Observable<any> {
+    let params = new HttpParams();
+
+    for(const [key, value] of Object.entries(queryParams || {})) {
+      params = params.set(key, value as string);
+    }
+
+    return this.http.get(this.url, {params: params}).pipe(
+      map(data => data),
+      catchError(err => this.handleError("Error Getting Camera List", err))
+    )
+  }
+
+  getCamera(cameraId: number, queryParams: any | undefined = undefined): Observable<any> {
+    let params = new HttpParams();
+
+    for(const [key, value] of Object.entries(queryParams || {})) {
+      params = params.set(key, value as string);
+    }
+
+    return this.http.get(`${this.url}/${cameraId}`, {params: params}).pipe(
       map(data => data),
       catchError(err => this.handleError("Error Getting Camera List", err))
     )

@@ -55,7 +55,7 @@ class BaseAPIHandler(RequestHandler):
     def route_request(self):
         """Route request to correct API endpoint."""
         unsupported_method = False
-        endpoint = re.sub("^/api/.*/", "/", self.request.uri)
+        endpoint = re.sub(r"^/api/[^/]*/", "/", self.request.uri)
 
         for route in self.routes:
             if re.match(route["path_pattern"], endpoint):
@@ -96,15 +96,19 @@ class BaseAPIHandler(RequestHandler):
         self.route_request()
 
     def options(self, *args):
+        """Route OPTIONS requests."""
         # no body
         # `*args` is for route with `path arguments` supports
         self.set_status(204)
         self.finish()
 
     def set_default_headers(self):
+        """Set default response headers."""
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Access-Control-Allow-Headers", "x-requested-with")
-        self.set_header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+        self.set_header(
+            "Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS"
+        )
 
 
 class APIRouter(tornado.routing.Router):

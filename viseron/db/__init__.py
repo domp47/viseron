@@ -2,7 +2,7 @@
 
 import logging
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import List, Optional
 
 from viseron.config import ViseronConfig, load_config
 from viseron.const import LOG_LEVELS
@@ -94,12 +94,33 @@ class AbstractCameraTable(AbstractDatabaseBase):
         """
 
     @abstractmethod
+    def get_all_cameras(self) -> List[Camera]:
+        """
+        Get all Camera definitions.
+
+        Returns: List of Cameras
+        """
+
+    @abstractmethod
     def get_camera_by_name(self, name: str) -> Optional[Camera]:
         """
         Get Camera definition by camera name.
 
         Args:
             name: Name of the camera.
+
+        Returns:
+            Camera: Camera definition if found
+            None: None if not found
+        """
+
+    @abstractmethod
+    def get_camera_by_id(self, camera_id: int) -> Optional[Camera]:
+        """
+        Get Camera definition by camera id.
+
+        Args:
+            camera_id: id of the camera.
 
         Returns:
             Camera: Camera definition if found

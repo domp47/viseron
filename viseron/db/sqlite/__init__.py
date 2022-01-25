@@ -3,7 +3,7 @@ import glob
 import os
 import pathlib
 import sqlite3
-from typing import Optional
+from typing import List, Optional
 
 from viseron.const import SQLITE_DB_PATH
 from viseron.db import (
@@ -141,16 +141,11 @@ class MotionEventTable(AbstractMotionEventTable):
 class CameraTable(AbstractCameraTable):
     """Camera Table implementation in SQLite."""
 
-    def get_camera_by_name(self, name: str) -> Optional[Camera]:
+    def get_all_cameras(self) -> List[Camera]:
         """
-        Get Camera definition by camera name.
+        Get all Camera definitions.
 
-        Args:
-            name: Name of the camera.
-
-        Returns:
-            Camera: Camera definition if found
-            None: None if not found
+        Returns: List of Cameras
         """
         sql = """SELECT id, name, mqtt_name, stream_format_id, host, port, username, password, width, height, fps,
                   global_args, input_args, hwaccel_args, codec, audio_codec, rtsp_transport_id, filter_args,
@@ -162,13 +157,105 @@ class CameraTable(AbstractCameraTable):
                   object_enabled, object_interval, object_labels, object_log_all_objects, object_max_frame_age,
                   object_log_level_id, publish_image, ffmpeg_log_level_id, ffmpeg_recoverable_errors,
                   ffprobe_log_level_id, log_level_id
+                    FROM camera
+                """
+
+        cameras = []
+        with sqlite3.connect(SQLITE_DB_PATH) as conn:
+            cur = conn.cursor()
+
+            cur.execute(sql)
+            while res := cur.fetchone():
+                camera = Camera(
+                    res[1],
+                    res[2],
+                    res[3],
+                    res[4],
+                    res[5],
+                    res[6],
+                    res[7],
+                    res[8],
+                    res[9],
+                    res[10],
+                    res[11],
+                    res[12],
+                    res[13],
+                    res[14],
+                    res[15],
+                    res[16],
+                    res[17],
+                    res[18],
+                    res[19],
+                    res[20],
+                    res[21],
+                    res[22],
+                    res[23],
+                    res[24],
+                    res[25],
+                    res[26],
+                    res[27],
+                    res[28],
+                    res[29],
+                    res[30],
+                    res[31],
+                    res[32],
+                    res[33],
+                    res[34],
+                    res[35],
+                    res[36],
+                    res[37],
+                    res[38],
+                    res[39],
+                    res[40],
+                    res[41],
+                    res[42],
+                    res[43],
+                    res[44],
+                    res[45],
+                    res[46],
+                    res[47],
+                    res[48],
+                    res[49],
+                    res[50],
+                    res[51],
+                    res[52],
+                    res[53],
+                )
+                camera.id = res[0]
+                cameras.append(camera)
+
+        return cameras
+
+    @classmethod
+    def __get_camera_by_key(cls, key: str, value: any) -> Optional[Camera]:
+        """
+        Get Camera definition by key and value.
+
+        Args:
+            key: to search for the camera.
+            value: to search by for the camera
+
+        Returns:
+            Camera: Camera definition if found
+            None: None if not found
+        """
+        sql = f"""SELECT id, name, mqtt_name, stream_format_id, host, port, username, password, width, height, fps,
+                  global_args, input_args, hwaccel_args, codec, audio_codec, rtsp_transport_id, filter_args,
+                  frame_timeout, pix_fmt_id, substream_stream_format_id, substream_port, substream_path, substream_width,
+                  substream_height, substream_fps, substream_input_args, substream_hwaccel_args, substream_codec,
+                  substream_audio_codec, substream_rtsp_transport_id, substream_filter_args, substream_frame_timeout,
+                  substream_pix_fmt_id, motion_interval, motion_trigger_detector, motion_trigger_recorder,
+                  motion_timeout, motion_max_timeout, motion_width, motion_height, motion_frames, motion_log_level_id,
+                  object_enabled, object_interval, object_labels, object_log_all_objects, object_max_frame_age,
+                  object_log_level_id, publish_image, ffmpeg_log_level_id, ffmpeg_recoverable_errors,
+                  ffprobe_log_level_id, log_level_id
             FROM camera
-            WHERE name = ?;"""
+            WHERE {key} = ?;"""
 
         with sqlite3.connect(SQLITE_DB_PATH) as conn:
             cur = conn.cursor()
 
-            cur.execute(sql, (name,))
+            cur.execute(sql, (value,))
             res = cur.fetchone()
             if not res:
                 return None
@@ -231,6 +318,14 @@ class CameraTable(AbstractCameraTable):
             camera.id = res[0]
 
             return camera
+
+    def get_camera_by_name(self, name: str) -> Optional[Camera]:
+        """Get Camera definition by camera name."""
+        return self.__get_camera_by_key("name", name)
+
+    def get_camera_by_id(self, camera_id: int) -> Optional[Camera]:
+        """Get Camera definition by camera id."""
+        return self.__get_camera_by_key("id", camera_id)
 
     def add_camera(self, camera: Camera) -> int:
         """

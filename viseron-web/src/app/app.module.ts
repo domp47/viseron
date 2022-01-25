@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatButtonModule } from '@angular/material/button';
-// import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 // import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-// import { MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 // import { MatDividerModule } from '@angular/material/divider';
 // import { MatFormFieldModule } from '@angular/material/form-field';
 // import { MatTooltipModule } from '@angular/material/tooltip';
@@ -35,13 +35,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { CameraGridComponent } from './cameras/camera-grid/camera-grid.component';
+import { ManageCamerasComponent } from './cameras/manage-cameras/manage-cameras.component';
+import { EditCameraComponent } from './cameras/edit-camera/edit-camera.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    CameraGridComponent
+    CameraGridComponent,
+    ManageCamerasComponent,
+    EditCameraComponent
   ],
   imports: [
     BrowserModule,
@@ -56,8 +60,8 @@ import { CameraGridComponent } from './cameras/camera-grid/camera-grid.component
     // MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    // MatIconModule,
-    // MatTableModule,
+    MatIconModule,
+    MatTableModule,
     // MatTooltipModule,
     // MatSortModule,
     // MatPaginatorModule,

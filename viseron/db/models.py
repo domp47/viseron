@@ -1,6 +1,8 @@
 """Models to represent that database tables."""
 from datetime import datetime
 
+import slugify as unicode_slug
+
 
 class Camera:
     """Object that represents that camera table."""
@@ -63,6 +65,7 @@ class Camera:
     ):
         self.id = None
         self.name = name
+        self.name_slug = unicode_slug.slugify(name, separator="_")
         self.mqtt_name = mqtt_name
         self.stream_format_id = stream_format_id
         self.host = host

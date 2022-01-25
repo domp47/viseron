@@ -2,9 +2,9 @@
 <div class="camera-grid">
     <mat-card class="camera-card" *ngFor="let nvr of cameraList">
         <mat-card-header>
-            <mat-card-title>{{ nvr.config.camera.name }}</mat-card-title>
-            <mat-card-subtitle>Host: {{ nvr.config.camera.host }}</mat-card-subtitle>
+            <mat-card-title>{{ nvr.name }}</mat-card-title>
+            <mat-card-subtitle>Host: {{ nvr.host }}</mat-card-subtitle>
         </mat-card-header>
-        <img class="stream" mat-card-image [src]="nvr.camera.stream.url" [alt]="nvr.config.camera.name">
+        <img class="stream" mat-card-image [src]="nvr.url" [alt]="nvr.name">
     </mat-card>
 </div>

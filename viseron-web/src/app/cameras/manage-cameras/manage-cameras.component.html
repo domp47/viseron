@@ -1,0 +1,42 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Source Column-->
+  <ng-container matColumnDef="source">
+    <th mat-header-cell *matHeaderCellDef> Source </th>
+    <td mat-cell *matCellDef="let element"> {{element.host}}:{{element.port}} </td>
+  </ng-container>
+
+  <!-- Recording Column -->
+  <ng-container matColumnDef="recordings">
+    <th mat-header-cell *matHeaderCellDef> Recordings </th>
+    <td mat-cell *matCellDef="let element"> <i>TODO</i> </td>
+  </ng-container>
+
+  <!-- Recording Enabled Column -->
+  <ng-container matColumnDef="r-enabled">
+    <th mat-header-cell *matHeaderCellDef> Recording Enabled </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon aria-hidden="false" [attr.aria-label]="element.motion_trigger_recorder ? 'Enabled' : 'Disabled'">
+        {{element.motion_trigger_recorder ? 'check_circle' : 'cancel'}}
+      </mat-icon>
+    </td>
+  </ng-container>
+
+  <!-- Motion Detection Enabled Column -->
+  <ng-container matColumnDef="o-enabled">
+    <th mat-header-cell *matHeaderCellDef> Object Detection Enabled </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon aria-hidden="false" [attr.aria-label]="element.object_enabled ? 'Enabled' : 'Disabled'">
+        {{element.object_enabled ? 'check_circle' : 'cancel'}}
+      </mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
