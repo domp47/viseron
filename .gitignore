@@ -127,6 +127,7 @@
 !/viseron-web/src/assets/*
 !/viseron-web/src/assets/images/*
 !/viseron-web/src/environments/*
+!/viseron-web/src/models/*
 
 # Repo
 !/docs
